@@ -454,8 +454,7 @@ module.exports = {
 ${text}`.trim(),
         fakes(Func.texted('italic', 'Report Eror Notification')),
          )
-          }
-            m.react('❌')       
+          }                 
           } finally {
             if (typeof plugin.after === 'function') {
               try {
