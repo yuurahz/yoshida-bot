@@ -8,12 +8,6 @@
 DATABASE_URL = '' // your mongodb database 
 ```
 
-### To install this script you need
-- [x] Server CPU/RAM 1/1GB (Min)
-- [x] NodeJS
-- [x] FFMPEG
-- [x] WhatsApp 
-
 ### Plugins 1
 ```Javascript
 let handler = async(m, {
@@ -70,8 +64,7 @@ module.exports = {
    run: async (m, {
       conn,
       text,
-      participants,
-      Func
+      participants
    }) => {
       try {
          // your code
@@ -95,9 +88,7 @@ module.exports = {
    async before(m, {
       conn,
       body,
-      isOwner,
-      groupSet,
-      Func
+      isOwner
    }) {
       try {
          // your code
