@@ -15,7 +15,6 @@ module.exports = {
     setting.cover = json.data.url
     m.reply('Cover successfully changed')
   } catch (e) {
-    console.log(e)
     return m.reply(Func.jsonFormat(e))
   }
 },
