@@ -129,7 +129,6 @@ https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git
 https://github.com/DuckyTeam/heroku-buildpack-imagemagick.git
 ```
 
-### Thanks To [![Nurutomo](https://github.com/Nurutomo.png?size=100)](https://github.com/Nurutomo) | [![Nando](https://github.com/rifnd.png?size=100)](https://github.com/rifnd)
-----|----|----|----|----
+### Thanks To
 [Yoshida](https://api.yoshida.my.id) | [Nurutomo](https://github.com/Nurutomo) | [Nando](https://github.com/rifnd) |
 APIs Provider | Author / Creator | Inspiration
