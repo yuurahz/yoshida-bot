@@ -1,4 +1,4 @@
-### YOSHIDA-BOT (CJS)
+### YOSHIDA-BOT (Base)
 
 > - This script is 100% free, which uses the api from [Yoshida-APIs](https://api.yoshida.my.id)
 > - Using the module from [@yoshx/func](https://github.com/Adixshnzz/Func)
@@ -128,3 +128,8 @@ https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git
 ```
 https://github.com/DuckyTeam/heroku-buildpack-imagemagick.git
 ```
+
+### Thanks To [![Nurutomo](https://github.com/Nurutomo.png?size=100)](https://github.com/Nurutomo) | [![Nando](https://github.com/rifnd.png?size=100)](https://github.com/rifnd)
+----|----|----|----|----
+[Yoshida](https://api.yoshida.my.id) | [Nurutomo](https://github.com/Nurutomo) | [Nando](https://github.com/rifnd) |
+APIs Provider | Author / Creator | Inspiration
