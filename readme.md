@@ -1,5 +1,13 @@
 ### YOSHIDA-BOT (CJS)
 
+> - This script is 100% free, which uses the api from [Yoshida-APIs](https://api.yoshida.my.id)
+> - Using the module from [@yoshx/func](https://github.com/Adixshnzz/Func)
+
+### Set in .env
+```
+DATABASE_URL = '' // your mongodb database 
+```
+
 ### To install this script you need
 - [x] Server CPU/RAM 1/1GB (Min)
 - [x] NodeJS
