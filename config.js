@@ -73,9 +73,12 @@ global.limit = {
   free: 100
 }
 
-// etc
-global.Func = new (require('./lib/functions'))
-global.scrap = new (require('./lib/scrape'))
+// to make it easier to use
+const { Function, Scraper, Converter } = new (require('@yoshx/func"))
+
+global.Func = Functions
+global.scrap = Scraper
+global.converter = Converter 
 
 
 // function reload file
