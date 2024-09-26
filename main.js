@@ -25,40 +25,51 @@ low = require('lowdb')
 } catch (e) {
 low = require('./lib/lowdb')
 }
+
 const { Low, JSONFile } = low
+
 const mongoDB = require('./lib/mongoDB')
+
 const randomID = length => randomBytes(Math.ceil(length * .5)).toString('hex').slice(0, length)
+
 const PORT = process.env.PORT || 3000
+
 global.API = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name] } : {}) })) : '')
+
 global.timestamp = {
   start: new Date
 }
+
 global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse())
+
 global.prefix = new RegExp('^[' + (opts['prefix'] || '‎!./@¿‽?#\\').replace(/[|\\{}()[\]^$+*?.\-\^]/g, '\\$&') + ']')
-global.db = new Low(/https?:\/\//.test(opts['db'] || '') ? new cloudDBAdapter(opts['db']) : /mongodb/i.test(opts['db']) ? new mongoDB(opts['db']) : new JSONFile(`${opts[0] ? opts[0] + '_' : ''}database.json`))
-global.DATABASE = db
+
+global.db = new Low(/https?:\/\//.test(process.env.DATABASE_URL || '') ? new cloudDBAdapter(process.env.DATABASE_URL) : /mongodb/i.test(process.env.DATABASE_URL) ? new mongoDB(process.env.DATABASE_URL) : new JSONFile(`${opts[0] ? opts[0] + '_' : ''}database.json`))
+
+global.DATABASE = global.db
+
 global.loadDatabase = async function loadDatabase() {
-	if (db.READ) return new Promise((resolve) => setInterval(function() {
-    (!db.READ ? (clearInterval(this), resolve(db.data == null ? loadDatabase() : db.data)) : null)
-	}, 1 * 1000))
-	if (db.data !== null) return
-	db.READ = true
-	await db.read()
-	db.READ = false
-	db.data = {
-		users: {},
-		chats: {},
-		stats: {},
-		msgs: {},
-		sticker: {},
-		settings: {},
-		respon: {},
-		menfess: {},
-		...(db.data || {})
-	}
- db.chain = _.chain(db.data)
- }
- loadDatabase()
+  return db.READ ? new Promise(resolve => {
+    const intervalId = setInterval(async () => {
+      if (!db.READ) {
+        clearInterval(intervalId)
+        resolve(db.data === null ? await loadDatabase() : db.data);
+      }
+    }, 1 * 1e3)
+  }) : db.data === null ? (db.READ = true, await db.read()?.catch(console.error), db.READ = null, db.data = {
+    users: {},
+    chats: {},
+    stats: {},
+    msgs: {},
+    sticker: {},
+    settings: {},
+    respon: {},
+    database: {},
+    ...db.data
+  }, db.chain = _.chain(db.data), null) : null
+}
+await loadDatabase()
+
  const usePairingCode = !process.argv.includes('--pairing')
  const useMobile = process.argv.includes('--mobile')
  const question = function(text) {
