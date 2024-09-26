@@ -80,6 +80,10 @@ global.Func = Functions
 global.scrap = Scraper
 global.converter = Converter 
 
+// api endpoint
+global.APIs = {
+ yosh: 'https://api.yoshida.my.id'
+}
 
 // function reload file
 const fs = require('fs')
