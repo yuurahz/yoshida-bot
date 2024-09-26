@@ -34,7 +34,7 @@ module.exports = {
 └ • *Register:* ${register}`
     m.reply(pp, caption)
   } catch (e) {
-    throw eror
+    m.reply(mess.eror)
   }
 },
   help: ['profile'],
