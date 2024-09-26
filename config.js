@@ -54,8 +54,8 @@ global.set = {
  idch: '@newsletter',
  idgc: '@g.us',
  thumb: 'https://telegra.ph/file/db5bc3f43b8320be112a7.jpg',
- gc: 'https://chat.whatsapp.com/HnoKcpzYsKE5y0thEM060h',
- ch: 'https://whatsapp.com/channel/0029VaBB5zLF1YlNMoA6YD0b'
+ gcUrl: 'https://chat.whatsapp.com/HnoKcpzYsKE5y0thEM060h',
+ chUrl: 'https://whatsapp.com/channel/0029VaBB5zLF1YlNMoA6YD0b'
 }
 
 // maximum options
