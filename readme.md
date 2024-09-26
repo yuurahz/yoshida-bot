@@ -1,11 +1,10 @@
 ### YOSHIDA-BOT (CJS)
 
 ### To install this script you need
-- [x] Server vCPU/RAM 1/1GB (Min)
+- [x] Server CPU/RAM 1/1GB (Min)
 - [x] NodeJS
 - [x] FFMPEG
 - [x] WhatsApp 
-
 
 ### Plugins 1
 ```Javascript
