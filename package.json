@@ -25,6 +25,7 @@
   "homepage": "https://github.com/Adixshnzz/yoshida-bot#readme",
   "dependencies": {
     "@whiskeysockets/baileys": "github:Whiskeysockets/Baileys",
+    "@yoshx/func": "github:Adixshnzz/Func",
     "axios": "^0.27.2",
     "cfonts": "^2.10.1",
     "chalk": "^4.1.2",
