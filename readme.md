@@ -130,5 +130,4 @@ https://github.com/DuckyTeam/heroku-buildpack-imagemagick.git
 ```
 
 ### Thanks To
-[Yoshida](https://api.yoshida.my.id) | [Nurutomo](https://github.com/Nurutomo) | [Nando](https://github.com/rifnd) |
-APIs Provider | Author / Creator | Inspiration
+[Apis](https://api.yoshida.my.id) | [Nurutomo](https://github.com/Nurutomo) | [Nando](https://github.com/rifnd) |
