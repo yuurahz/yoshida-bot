@@ -1,17 +1,26 @@
 ### YOSHIDA-BOT (Base)
-
 ---------
+![cover](https://telegra.ph/file/503bfc9fac676b2274ebe.jpg)
 
+<h1 align="center">Yoshida Multi Device</h1>
+
+<p align="center">
+<a href="https://wa.me/62882007855266"><img title="Grup" src="https://img.shields.io/badge/Contact to Owner-black.svg?style=for-the-badge&logo=whatsapp"></a>
+</p>
+<p align="center">
+<a href="https://chat.whatsapp.com/HnoKcpzYsKE5y0thEM060h"><img title="Grup" src="https://img.shields.io/badge/Grup WhatsApp Yoshida Bot-green.svg?style=for-the-badge&logo=whatsapp"></a>
+
+# Introduction Yoshida
+> Yoshida is a WhatsApp Bot with many multifunctional features, using Baileys 🔥 For Free
+---------
 > - This script is 100% free, which uses the api from [Yoshida-APIs](https://api.yoshida.my.id)
 > - Using the module from [@yoshx/func](https://github.com/Adixshnzz/Func)
-
+---------
 ### Set in .env
-```
+```Javascript
 DATABASE_URL = '' // your mongodb database 
 ```
-
 ---------
-
 ### Plugins run command 
 ```Javascript
 module.exports = {
