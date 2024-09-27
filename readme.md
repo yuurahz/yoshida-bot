@@ -110,7 +110,8 @@ Jika Mengalami Kesulitan Hubungi kontak Owner:
 
 ## ✨ Big Thanks To
 - My God
-- My Parent
+- My partner
+- My friends 
 - All Creator Bot
 ---------
 
