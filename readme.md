@@ -1,5 +1,7 @@
 ### YOSHIDA-BOT (Base)
 
+---------
+
 > - This script is 100% free, which uses the api from [Yoshida-APIs](https://api.yoshida.my.id)
 > - Using the module from [@yoshx/func](https://github.com/Adixshnzz/Func)
 
@@ -8,6 +10,7 @@
 DATABASE_URL = '' // your mongodb database 
 ```
 
+---------
 
 ### Plugins run command 
 ```Javascript
@@ -51,6 +54,7 @@ module.exports = {
    }
 }
 ```
+---------
 
 ### Install and run
 ```
@@ -59,6 +63,7 @@ cd repo
 $ npm install
 $ npm start
 ```
+---------
 
 ## Install & Run use PM2
 
@@ -82,14 +87,13 @@ $ pm2 start index.js && pm2 save && pm2 logs
 - Youtube: Play Audio, Youtube Video & Audio, Youtube Shorts, etc.
 - Internet: Google Image Search, Weather & Earthquake Information, Random Facts, Random Jokes, Spotify Search, Yandex, etc.
 - Game: Bomb, Werewolf, etc.
-
+---------
 Wanna see all the bot commands? lookout our main bot [here](https://wa.me/62856400229695?text=.menu)
 > Will be increased every time it get new updates
-
+---------
 ### Requirements
 
-- [x] Apikey
-- [x] Tempat Run
+- [x] Server Panel/Vps Minimum Space (1gb)
 
 > The requirements above are the minimum requirements to running the bot. Upgrade it higher for better experience
 
