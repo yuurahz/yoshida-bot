@@ -75,22 +75,9 @@ $ npm install
 $ pm2 start index.js && pm2 save && pm2 logs
 ```
 ---------
-### The features we provide
-- AI: OpenAI, BlackBox, Bard, Bing, AI Character, To Anime, etc.
-- Anime: Animeinfo, Mangainfo, Random Anime Pfp, Anime Couple Pfp, etc.
-- Downloader: Instagram, TikTok, Facebook, Danbooru, Gitclones, Mediafire, Pixiv, etc.
-- Tools: Lookup, Photo Enhancer, Encryption, Short Url, Temp Mail, Translate, etc.
-- Sticker: Sticker Maker, Sticker to Video, Gif To Sticker, Watermark a Sticker, etc.
-- Group: Ban Chat, Kick Member, Hidetags, Welcome & Bye, Demote, Promote, Invite, etc.
-- Anonymous: Start, Leave, Next
-- Owner: Broadcasts, Add & Delete Premium Users, Get Plugin, Cheat, Session, Randompicks for giveaway, Verify & Unverify Users, etc.
-- Youtube: Play Audio, Youtube Video & Audio, Youtube Shorts, etc.
-- Internet: Google Image Search, Weather & Earthquake Information, Random Facts, Random Jokes, Spotify Search, Yandex, etc.
-- Game: Bomb, Werewolf, etc.
-
-Wanna see all the bot commands? lookout our main bot [here](https://wa.me/62856400229695?text=.menu)
+Wanna see all the bot commands? lookout our main bot [Try demo](https://wa.me/62856400229695?text=.menu)
 > Will be increased every time it get new updates
-
+---------
 ### Requirements
 - [x] Server Panel/Vps Minimum Space (1gb)
 > The requirements above are the minimum requirements to running the bot. Upgrade it higher for better experience
