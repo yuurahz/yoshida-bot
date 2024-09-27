@@ -58,7 +58,7 @@ module.exports = {
    }
 }
 ```
----------
+
 ### Install and run
 ```
 clone this repo
@@ -66,7 +66,7 @@ cd repo
 $ npm install
 $ npm start
 ```
----------
+
 ## Install & Run use PM2
 
 ```
