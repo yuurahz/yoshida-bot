@@ -114,13 +114,10 @@ Jika Mengalami Kesulitan Hubungi kontak Owner:
 - My God
 - My Parent
 - All Creator Bot
-
+---------
 
 ## Customer Support
  [![nando](https://github.com/rifnd.png?size=100)](https://github.com/rifnd) | [![Adi](https://github.com/Adixshnzz.png?size=100)](https://github.com/Adixshnzz) | [![Nurutomo](https://github.com/Nurutomo.png?size=100)](https://github.com/Nurutomo)
 ----|----|----
 [Nando](https://github.com/rifnd) | [Adi](https://github.com/Adixshnzz) | [Nurutomo](https://github.com/Nurutomo)
  Inspiration | Developer | Original Base
-
-## Donate
-- [Saweria](https://saweria.co/Adisptro)
