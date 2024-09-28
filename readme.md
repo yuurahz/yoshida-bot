@@ -18,7 +18,7 @@ DATABASE_URL = '' // your mongodb database
 ```Javascript
 $ npm install
 $ npm start
-$ node . --db //for acces mongodb database
+$ node . --db atau --dbv2 //for acces mongodb database
 ```
 
 ### Plugins run command 
