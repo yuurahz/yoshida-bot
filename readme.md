@@ -74,8 +74,7 @@ Wanna see the bot feature? lookout our main bot [Official](https://wa.me/6285640
 - [x] Server Panel/Vps Minimum Space (1gb)
 > The requirements above are the minimum requirements to running the bot. Upgrade it higher for better experience
 
-Jika Mengalami Kesulitan Hubungi kontak Owner:
-[Owner](https://wa.me/6282375933838)
+Jika Mengalami Kesulitan Hubungi [Owner](https://wa.me/6282375933838)
 
 ---------
 
@@ -85,13 +84,6 @@ Jika Mengalami Kesulitan Hubungi kontak Owner:
 3. Don't use this repository wrong!
 4. If you have problem chat me in owner number
 
----------
-
-## ✨ Big Thanks To
-- My God
-- My partner
-- My friends 
-- All Creator Bot
 ---------
 
 ## Customer Support
