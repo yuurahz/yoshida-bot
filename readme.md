@@ -9,7 +9,7 @@
 # Introduction
 > Yoshida is a WhatsApp Bot with many multifunctional features, using Baileys 🔥 For Free
 > - This script is 100% free, which uses the api from [Yoshida-APIs](https://api.yoshida.my.id)
-> - Using the module from [@yoshx/func](https://github.com/Adixshnzz/Func)
+> - Using the module from [@yoshx/func](https://github.com/YuuraHz/Func)
 
 ### Set in .env
 ```Javascript
@@ -103,7 +103,7 @@ Jika Mengalami Kesulitan Hubungi kontak Owner:
 ---------
 
 ## Customer Support
- [![nando](https://github.com/rifnd.png?size=100)](https://github.com/rifnd) | [![Adi](https://github.com/Adixshnzz.png?size=100)](https://github.com/Adixshnzz) | [![Nurutomo](https://github.com/Nurutomo.png?size=100)](https://github.com/Nurutomo)
+ [![nando](https://github.com/rifnd.png?size=100)](https://github.com/rifnd) | [![Adi](https://github.com/Adixshnzz.png?size=100)](https://github.com/YuuraHz) | [![Nurutomo](https://github.com/Nurutomo.png?size=100)](https://github.com/Nurutomo)
 ----|----|----
-[Nando](https://github.com/rifnd) | [Adi](https://github.com/Adixshnzz) | [Nurutomo](https://github.com/Nurutomo)
+[Nando](https://github.com/rifnd) | [Adi](https://github.com/YuuraHz) | [Nurutomo](https://github.com/Nurutomo)
  Inspiration | Developer | Original Base
