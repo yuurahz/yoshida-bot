@@ -34,8 +34,8 @@ global.bot = {
 // creator bot
 global.owner = {
  name: 'Adi',
- number: 62882007855266,
- jid: '62882007855266@s.whatsapp.net',
+ number: 6282375933838,
+ jid: '6282375933838@s.whatsapp.net',
  ig: 'https://instagram.com/',
  fb: 'https://www.facebook.com/',
  gh: 'https://github.com/'
@@ -60,7 +60,7 @@ global.set = {
 
 // maximum options
 global.max = {
- warn: 3,
+ warn: 5,
  download: 1000,
  ram_usage: 2100000000,
  upload: 80,
