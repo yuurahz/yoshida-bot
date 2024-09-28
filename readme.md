@@ -14,6 +14,13 @@
 DATABASE_URL = '' // your mongodb database 
 ```
 
+### Install and run
+```Javascript
+$ npm install
+$ npm start or node .
+node . --db //for acces mongodb database
+```
+
 ### Plugins run command 
 ```Javascript
 module.exports = {
@@ -57,12 +64,6 @@ module.exports = {
       return true
    }
 }
-```
-
-### Install and run
-```
-$ npm install
-$ npm start
 ```
 ---------
 Wanna see the bot feature? lookout our main bot [Official](https://wa.me/62856400229695?text=.menu)
