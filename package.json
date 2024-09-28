@@ -4,6 +4,7 @@
    "description": "Lightweight whatsapp bot",
    "main": "index.js",
    "directories": {
+      "plugins": "plugins",
       "lib": "lib"
    },
    "scripts": {
@@ -15,7 +16,8 @@
    },
    "keywords": [
       "whatsapp-bot",
-      "baileys"
+      "baileys",
+      "yoshida-bot"
    ],
    "author": "Yuurahz",
    "license": "MIT",
