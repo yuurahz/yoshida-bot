@@ -58,22 +58,14 @@ module.exports = {
 ```
 
 ### Install and run
-```
+```js
 clone this repo
 cd repo
 $ npm install
 $ npm start
 ```
-
-## Install & Run use PM2
-
-```
-$ npm install pm2 -g
-$ npm install
-$ pm2 start index.js && pm2 save && pm2 logs
-```
 ---------
-Wanna see all the bot commands? lookout our main bot [Try demo](https://wa.me/62856400229695?text=.menu)
+Wanna see the bot feature? lookout our main bot [Official](https://wa.me/62856400229695?text=.menu)
 > Will be increased every time it get new updates
 ---------
 ### Requirements
