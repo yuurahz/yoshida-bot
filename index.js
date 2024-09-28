@@ -13,7 +13,7 @@ CFonts.say(`${package.name}`, {
         align: 'center',
         colors: 'magenta'
 })
-CFonts.say(`${package.name} By ${package.author}`, {
+CFonts.say(`${package.description} By ${package.author}`, {
         font: 'console',
         align: 'center',
         colors: 'system'
