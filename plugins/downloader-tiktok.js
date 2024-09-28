@@ -4,7 +4,7 @@ module.exports = {
       usedPrefix,
       command
 }) => {
- if (!text) return m.reply(Func.example(prefix, command, 'https://vt.tiktok.com/linkya'))
+ if (!text) return m.reply(Func.example(usedPrefix, command, 'https://vt.tiktok.com/linkya'))
   m.react('⏱️')
   try {
     let fetch = await Func.fetchJson(API('yosh', '/api/downloader/tiktok', { url: text }))
@@ -12,7 +12,7 @@ module.exports = {
     if (data.images) {
     let c = 0, d = data.images.length
       for (let i of data.images) {
-        if (c == 0) await yos.sendMessage(
+        if (c == 0) await conn.sendMessage(
           m.chat,
           {
             image: {
@@ -22,12 +22,12 @@ module.exports = {
           },
           { quoted: m },
         );
-        else await yos.sendFile(m.chat, i, '', null, m)
+        else await conn.sendFile(m.chat, i, '', null, m)
         c += 1
        await Func.delay(5000)
       }
     } else {
-      await yos.sendMessage(
+      await conn.sendMessage(
         m.chat,
         {
           video: {
