@@ -30,11 +30,13 @@ module.exports = {
       }
    },
    help: ['command'],
-   use: 'example',
    tags: ['category'],
    command: /^(command)$/i,
    group: Boolean,
-   admin: Boolean
+   admin: Boolean,
+   limit: Boolean,
+   botAdmin: Boolean,
+   owner: Boolean 
 }
 ```
 
@@ -58,7 +60,7 @@ module.exports = {
 ```
 
 ### Install and run
-```js
+```Javascript
 clone this repo
 cd repo
 $ npm install
