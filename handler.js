@@ -5,7 +5,7 @@ const {
   proto,
   getAggregateVotesInPollMessage
  } = require("@whiskeysockets/baileys"),
- simple = require('./lib/simple'),
+ { smsg } = require('./lib/simple'),
  util = require('util'),
  moment = require('moment-timezone'),
  fs = require('fs'),
@@ -13,20 +13,21 @@ const {
  isNumber = x => typeof x === 'number' && !isNaN(x)
 
 module.exports = {
-  async handler(chatUpdate) {
-    this.msgqueque = this.msgqueque || []
-    if (!chatUpdate) return
-    let m = chatUpdate.messages[chatUpdate.messages.length - 1]
-    if (!m) return
-    if (m.message?.viewOnceMessageV2) m.message = m.message.viewOnceMessageV2.message
-    if (m.message?.documentWithCaptionMessage) m.message = m.message.documentWithCaptionMessage.message
-    if (m.message?.viewOnceMessageV2Extension) m.message = m.message.viewOnceMessageV2Extension.message
-    if (db.data == null) await loadDatabase()
-    try {
-      m = simple.smsg(this, m) || m
+   async handler(chatUpdate) {
+      if (db.data == null) await loadDatabase()
+      this.msgqueque = this.msgqueque || []
+      if (!chatUpdate) return
+      this.pushMessage(chatUpdate.messages).catch(console.error)
+      let m = chatUpdate.messages[chatUpdate.messages.length - 1]
       if (!m) return
-      m.exp = 0
-      m.limit = false
+      if (m.message?.viewOnceMessageV2) m.message = m.message.viewOnceMessageV2.message
+      if (m.message?.documentWithCaptionMessage) m.message = m.message.documentWithCaptionMessage.message
+      if (m.message?.viewOnceMessageV2Extension) m.message = m.message.viewOnceMessageV2Extension.message
+      try {
+         m = smsg(this, m) || m
+         if (!m) return
+         m.exp = 0
+         m.limit = false
       try {
         let user = db.data.users[m.sender]
         if (typeof user !== 'object') db.data.users[m.sender] = {}
@@ -97,12 +98,12 @@ module.exports = {
           usebot: 0
         }        
                  // == Ai Respon == //
-                let ai = db.data.users[m.sender].ai 
-                if (typeof ai !== 'object') db.data.users[m.sender].ai = {}
-                if (ai) {
-                   if (!isNumber(ai.respon)) ai.respon = 0                    } else db.data.users[m.sender].ai = {
-                   ai.respon: 0
-                }
+        let ai = db.data.users[m.sender].ai 
+        if (typeof ai !== 'object') db.data.users[m.sender].ai = {}
+        if (ai) {
+           if (!isNumber(ai.respon)) ai.respon = 0                     } else db.data.users[m.sender].ai = {
+           respon: 0
+         }
         
         // == Chats Schema == //
         let chat = db.data.chats[m.chat]
@@ -172,6 +173,7 @@ module.exports = {
         let settings = db.data.settings[this.user.jid]
         if (typeof settings !== 'object') db.data.settings[this.user.jid] = {}
         if (settings) {
+          if (!'autoread' in settings) settings.autoread = true
           if (!'anticall' in settings) settings.anticall = true
           if (!'grouponly' in settings) settings.grouponly = false
           if (!'autobio' in settings) settings.autobio = false
@@ -184,6 +186,7 @@ module.exports = {
           if (!'link' in settings) settings.link = set.gc
           if (!'cover' in settings) settings.cover = 'https://iili.io/JAt7vf4.jpg'
         } else db.data.settings[this.user.jid] = {
+          autoread: true,
           anticall: true,
           grouponly: false,
           autobio: false,
@@ -191,15 +194,21 @@ module.exports = {
           backupTime: 0,
           style: 2,
           blockcmd: [],
-          owners: ['62882007855266', '62882007855266'],
+          owners: ['62882007855266'],
           moderator: ['62882007855266'],
           link: set.gc,
-          cover: '' || global.thumb
-        }
+          cover: '' || set.thumb
+      }        
+        let database = db.data?.database
+        if (typeof database !== "object") db.data.database = {}
+        let dbai = db.data?.dbai
+        if (typeof dbai !== "object") db.data.dbai = {}
+        let game = db.data?.game
+        if (typeof game !== "object") db.data.game = {}
       } catch (e) {
         console.error(e)
       }
-
+            
       const isROwner = [global.owner.number, this.decodeJid(this.user.jid).split`@` [0], ...db.data.settings[this.user.jid].owners].map(v => v + '@s.whatsapp.net').includes(m.sender)
       const isOwner = isROwner || m.fromMe
       const isMods = db.data.settings[this.user.jid].moderator 
@@ -209,8 +218,8 @@ module.exports = {
       if (isROwner) {
         db.data.users[m.sender].premiumDate = "Permanent"
         db.data.users[m.sender].limit = limit.premium
-        db.data.users[m.sender].exp = "Unlimited"
         db.data.users[m.sender].money = "Unlimited"
+        db.data.users[m.sender].ai.respon = 100000000
       } else if (isPrems) 
         db.data.users[m.sender].limit = limit.premium
       
@@ -231,15 +240,16 @@ module.exports = {
       const user = (m.isGroup ? participants.find(u => conn.decodeJid(u.id) === m.sender) : {}) || {}
       const bot = (m.isGroup ? participants.find(u => conn.decodeJid(u.id) == this.user.jid) : {}) || {}
       const isRAdmin = user && user.admin == 'superadmin' || false
+      const body = typeof m.text == 'string' ? m.text : false
       const isAdmin = isRAdmin || user && user.admin == 'admin' || false
       const isBotAdmin = bot && bot.admin || false
       const users = global.db.data.users[m.sender],
         chat = global.db.data.chats[m.chat],
         setting = global.db.data.settings[this.user.jid]
 
-      if (opts["autoread"]) conn.readMessages([m.key])
+      if (db.data.settings[conn.user.jid].autoread) conn.readMessages([m.key])
       if (opts['nyimak']) return
-      if (!m.fromMe && bot.self) return
+      if (!m.fromMe && opts['self']) return
       if (opts['pconly'] && m.chat.endsWith('g.us')) return
       if (opts['gconly'] && !m.fromMe && !isPrems && !m.chat.endsWith('g.us') && !Object.values((await conn.groupMetadata(set.idgc)).participants).find(users => users.id == m.sender)) return m.reply(status.gconly)
       if (opts['swonly'] && m.chat !== 'status@broadcast') return
@@ -305,10 +315,9 @@ module.exports = {
               [[[], new RegExp]]
         ).find(p => p[1])
         if (typeof plugin.before === 'function') if (await plugin.before.call(this, m, {
-          match, conn: this, participants, groupMetadata, user, bot, isROwner, isOwner, isRAdmin, isAdmin, isBotAdmin, isPrems, users, chat, setting, chatUpdate,
+        body, match, conn: this, participants, groupMetadata, user, bot, isROwner, isOwner, isRAdmin, isAdmin, isBotAdmin, isPrems, users, chat, setting, chatUpdate,
         })) continue
-        
-        
+                
         if (typeof plugin !== 'function') continue
         if ((usedPrefix = (match[0] || '')[0])) {
           let noPrefix = m.text.replace(usedPrefix, '')
@@ -316,7 +325,7 @@ module.exports = {
           args = args || []
           let _args = noPrefix.trim().split` `.slice(1)
           let text = _args.join` `
-          let q = m.quoted ? m.quoted.text : text
+          let quoted = m.quoted ? m.quoted.text : text
           command = (command || '').toLowerCase()
           let fail = plugin.fail || global.mess
           let isAccept = plugin.command instanceof RegExp ?
@@ -431,7 +440,7 @@ module.exports = {
 	     continue
           }
           let extra = {
-            match, usedPrefix, noPrefix, _args, args, command, text, conn: this, participants, groupMetadata, user, bot, isROwner, isOwner, isRAdmin, isAdmin, isBotAdmin, isPrems, users, chat, setting, chatUpdate,
+          quoted, body, match, usedPrefix, noPrefix, _args, args, command, text, conn: this, participants, groupMetadata, users, bot, isROwner, isOwner, isRAdmin, isAdmin, isBotAdmin, isPrems, users, chat, setting, chatUpdate,
           }
           try {
             await plugin.call(this, m, extra)
@@ -454,7 +463,8 @@ module.exports = {
 ${text}`.trim(),
         fakes(Func.texted('italic', 'Report Eror Notification')),
          )
-          }                 
+          }
+            m.react('❌')       
           } finally {
             if (typeof plugin.after === 'function') {
               try {
@@ -512,7 +522,7 @@ ${text}`.trim(),
         console.log(m, m.quoted, e)
       }
       if (opts["autoread"])
-        await this.chatRead(
+        await conn.chatRead(
           m.chat,
           m.isGroup ? m.sender : undefined,
           m.id || m.key.id,
