@@ -25,10 +25,9 @@ low = require('lowdb')
 } catch (e) {
 low = require('./lib/lowdb')
 }
-
 const { Low, JSONFile } = low
-
-const mongoDB = require('./lib/mongoDB')
+const { cloudDBAdapter } = require('./lib/cloudDBAdapter')
+const { mongoDB, mongoDBV2 } = require('./lib/mongoDB')
 
 const randomID = length => randomBytes(Math.ceil(length * .5)).toString('hex').slice(0, length)
 
@@ -44,7 +43,9 @@ global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse()
 
 global.prefix = new RegExp('^[' + (opts['prefix'] || '‎!./@¿‽?#\\').replace(/[|\\{}()[\]^$+*?.\-\^]/g, '\\$&') + ']')
 
-global.db = new Low(/https?:\/\//.test(process.env.DATABASE_URL || '') ? new cloudDBAdapter(process.env.DATABASE_URL) : /mongodb/i.test(process.env.DATABASE_URL) ? new mongoDB(process.env.DATABASE_URL) : new JSONFile(`${opts[0] ? opts[0] + '_' : ''}database.json`))
+const dbInstance = !bot.mongoUrl ? new JSONFile('db.json') : /^https?:\/\//.test(bot.mongoUrl) ? new cloudDBAdapter(bot.mongoUrl) : /^mongodb(\+srv)?:\/\//i.test(bot.mongoUrl) && opts.db ? new mongoDB(bot.mongoUrl) : /^mongodb(\+srv)?:\/\//i.test(bot.mongoUrl) && opts.dbv2 ? new mongoDBV2(bot.mongoUrl) : new JSONFile('db.json')
+
+global.db = new Low(dbInstance)
 
 global.DATABASE = global.db
 
@@ -65,26 +66,30 @@ global.loadDatabase = async function loadDatabase() {
     settings: {},
     respon: {},
     database: {},
+    menfess: {},
+    game: {},
     ...db.data
   }, db.chain = _.chain(db.data), null) : null
 }
 await loadDatabase()
 
- const usePairingCode = !process.argv.includes('--pairing')
- const useMobile = process.argv.includes('--mobile')
- const question = function(text) {
- return new Promise(function(resolve) {
- rl.question(text, resolve)
- })
+const usePairingCode = !process.argv.includes('--pairing')
+
+const useMobile = process.argv.includes('--mobile')
+
+const question = function(text) {
+return new Promise(function(resolve) {
+rl.question(text, resolve)
+})
 }
- const rl = require('readline').createInterface(process.stdin, process.stdout)
- const store = makeInMemoryStore({
- logger: pino({ level: "silent", stream: "store" }),
- })
- const { version, isLatest } = await fetchLatestBaileysVersion()
- let { state, saveCreds } = await useMultiFileAuthState(path.resolve('./session'))
- const msgRetryCounterCache = new NodeCache()
- const connectionOptions = {
+const rl = require('readline').createInterface(process.stdin, process.stdout)
+const store = makeInMemoryStore({
+logger: pino({ level: "silent", stream: "store" }),
+})
+const { version, isLatest } = await fetchLatestBaileysVersion()
+let { state, saveCreds } = await useMultiFileAuthState(path.resolve('./session'))
+const msgRetryCounterCache = new NodeCache()
+const connectionOptions = {
         version,
         logger: pino({ level: 'silent' }), 
         printQRInTerminal: !usePairingCode, 
@@ -193,7 +198,7 @@ await loadDatabase()
  restartLimitAndBalance()
 
  	
-async function connectionUpdate(update) {
+  async function connectionUpdate(update) {
   const { receivedPendingNotifications, connection, lastDisconnect, isOnline, isNewLogin } = update
   if (isNewLogin) conn.isInit = true
   if (connection == 'connecting') console.log(chalk.redBright('Mengaktifkan Bot, Mohon tunggu sebentar...'))
