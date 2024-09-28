@@ -1,5 +1,3 @@
-![cover](https://telegra.ph/file/503bfc9fac676b2274ebe.jpg)
-<h1 align="center">Yoshida Multi Device</h1>
 <p align="center">
 <a href="https://wa.me/6282375933838"><img title="Grup" src="https://img.shields.io/badge/Contact to Owner-black.svg?style=for-the-badge&logo=whatsapp"></a>
 </p>
