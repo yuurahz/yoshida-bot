@@ -60,9 +60,7 @@ module.exports = {
 ```
 
 ### Install and run
-```Javascript
-clone this repo
-cd repo
+```
 $ npm install
 $ npm start
 ```
