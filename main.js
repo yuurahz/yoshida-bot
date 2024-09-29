@@ -43,7 +43,7 @@ global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse()
 
 global.prefix = new RegExp('^[' + (opts['prefix'] || '‎!./@¿‽?#\\').replace(/[|\\{}()[\]^$+*?.\-\^]/g, '\\$&') + ']')
 
-const dbInstance = !bot.mongoUrl ? new JSONFile('db.json') : /^https?:\/\//.test(bot.mongoUrl) ? new cloudDBAdapter(bot.mongoUrl) : /^mongodb(\+srv)?:\/\//i.test(bot.mongoUrl) && opts.db ? new mongoDB(bot.mongoUrl) : /^mongodb(\+srv)?:\/\//i.test(bot.mongoUrl) && opts.dbv2 ? new mongoDBV2(bot.mongoUrl) : new JSONFile('db.json')
+const dbInstance = !process.env.DATABASE_URL ? new JSONFile('db.json') : /^https?:\/\//.test(process.env.DATABASE_URL) ? new cloudDBAdapter(process.env.DATABASE_URL) : /^mongodb(\+srv)?:\/\//i.test(process.env.DATABASE_URL) && opts.db ? new mongoDB(process.env.DATABASE_URL) : /^mongodb(\+srv)?:\/\//i.test(process.env.DATABASE_URL) && opts.dbv2 ? new mongoDBV2(process.env.DATABASE_URL) : new JSONFile('db.json')
 
 global.db = new Low(dbInstance)
 
