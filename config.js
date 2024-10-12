@@ -76,7 +76,7 @@ global.limit = {
 // to make it easier to use
 const { Function, Scraper, Converter } = new (require('@yoshx/func'))
 
-global.Func = Functions
+global.Func = Function
 global.scrap = Scraper
 global.converter = Converter 
 
