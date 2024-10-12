@@ -13,7 +13,7 @@ module.exports = {
   var pp = './src/pp.png'
   } finally {
     let setting = db.data.users[sender]
-    let { min, xp, max } = levelling.xpRange(setting.level, global.multiplier)
+    let { min, xp, max } = levelling.xpRange(setting.level, global.max.multiplier)
     let premiumDate = isNaN(setting.premiumDate)
       ? setting.premiumDate
       : `${(await Func.toDate(setting.premiumDate)) || "Tidak ada waktu durasi"}`     
