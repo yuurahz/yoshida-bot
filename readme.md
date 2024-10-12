@@ -3,7 +3,7 @@
 > - This script is 100% free, which uses the api from [Yoshida-APIs](https://api.yoshida.my.id)
 > - Using the module from [@yoshx/func](https://github.com/YuuraHz/Func)
 
-### Set in .env
+## Set in .env
 ```Javascript
 DATABASE_URL = '' // your mongodb database 
 ```
@@ -78,8 +78,8 @@ Jika Mengalami Kesulitan Hubungi [Owner](https://wa.me/6282375933838)
 
 ---------
 
-## Customer Support
+## Contributor
  [![nando](https://github.com/rifnd.png?size=100)](https://github.com/rifnd) | [![Adi](https://github.com/YuuraHz.png?size=100)](https://github.com/YuuraHz) | [![Nurutomo](https://github.com/Nurutomo.png?size=100)](https://github.com/Nurutomo)
 ----|----|----
 [Nando](https://github.com/rifnd) | [Adi](https://github.com/YuuraHz) | [Nurutomo](https://github.com/Nurutomo)
- Inspiration | Developer | Original Base
+ Inspiration | Developer | Author
