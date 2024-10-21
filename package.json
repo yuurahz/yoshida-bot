@@ -27,7 +27,7 @@
   "homepage": "https://github.com/YuuraHz/yoshida-bot#readme",
   "dependencies": {
     "@whiskeysockets/baileys": "github:Whiskeysockets/Baileys",
-    "@yoshx/func": "github:YuuraHz/Func",
+    "@yoshx/func": "github:yuurahz/Func",
     "axios": "^0.27.2",
     "cfonts": "^2.10.1",
     "chalk": "^4.1.2",
