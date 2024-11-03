@@ -1,3 +1,5 @@
+<p align="center"> <img src="https://komarev.com/ghpvc/?username=yuurahz&label=Repo%20views&color=0e75b6&style=flat" alt="yuurahz" /> </p>
+
 ## Introduction
 > Yoshida is a WhatsApp Bot with many multifunctional features, using Baileys For Free
 > - This script is 100% free, which uses the api from [Yoshida-APIs](https://api.yoshida.my.id)
