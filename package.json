@@ -1,5 +1,5 @@
 {
-   "name": "Base",
+   "name": "Yoshida Bot",
    "version": "1.1.1",
    "description": "Lightweight whatsapp bot",
    "main": "index.js",
@@ -8,7 +8,7 @@
       "lib": "lib"
    },
    "scripts": {
-      "start": "node index.js --db"
+      "start": "node . --db"
    },
    "repository": {
       "type": "git",
@@ -17,8 +17,7 @@
    "keywords": [
       "whatsapp-bot",
       "baileys",
-      "yoshida-bot",
-      "base"
+      "base-bot"
    ],
    "author": "Yuurahz",
    "license": "MIT",
@@ -33,14 +32,16 @@
     "cfonts": "^2.10.1",
     "chalk": "^4.1.2",
     "cheerio": "^1.0.0-rc.12",
-    "file-type": "^16.5.3",
+    "fluent-ffmpeg": "^2.1.2",
     "node-fetch": "^2.7.0",
     "path": "^0.12.7",
     "pino": "^7.11.0",
+    "link-preview-js": "^3.0.5",
     "lodash": "^4.17.21",
     "lowdb": "^2.1.0",
     "moment-timezone": "^0.5.43",
     "mongoose": "^7.5.0",
+    "node-webpmux": "^3.1.7",
     "qrcode": "^1.5.0",
     "request": "^2.88.2",
     "syntax-error": "1.4.0",
