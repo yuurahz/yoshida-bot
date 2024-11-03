@@ -1,10 +1,7 @@
-let os = require("os"),
-   speed = require("performance-now"),
-   {
- spawn,
- exec, 
- execSync 
- } = require("child_process")
+let os = require('os'),
+   speed = require('performance-now'),
+   { exec } = require('child_process')
+
 module.exports = {
    run: async (m, {
 }) => {
