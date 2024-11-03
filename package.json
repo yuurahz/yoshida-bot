@@ -1,5 +1,5 @@
 {
-   "name": "Yoshida Bot",
+   "name": "Base",
    "version": "1.1.1",
    "description": "Lightweight whatsapp bot",
    "main": "index.js",
