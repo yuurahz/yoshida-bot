@@ -67,9 +67,6 @@ Wanna see the bot feature? lookout our main bot [Official](https://wa.me/6285640
 ## Requirements
 - [x] Server Panel/Vps Minimum Space (1gb)
 > The requirements above are the minimum requirements to running the bot. Upgrade it higher for better experience
-
-Jika Mengalami Kesulitan Hubungi [Owner](https://wa.me/6282375933838)
-
 ---------
 
 ## 📮 S&K
