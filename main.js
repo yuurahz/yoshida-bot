@@ -19,19 +19,15 @@ const { default: useSingleFileAuthState, useMultiFileAuthState, makeInMemoryStor
  { color } = require('./lib/color'),
  NodeCache = require('node-cache'),
  simple = require('./lib/simple')
-var low
-try {
-low = require('lowdb')
-} catch (e) {
-low = require('./lib/lowdb')
-}
+ var low
+ try {
+  low = require('lowdb')
+ } catch (e) {
+  low = require('./lib/lowdb')
+ }
 const { Low, JSONFile } = low
 const { cloudDBAdapter } = require('./lib/cloudDBAdapter')
 const { mongoDB, mongoDBV2 } = require('./lib/mongoDB')
-
-const randomID = length => randomBytes(Math.ceil(length * .5)).toString('hex').slice(0, length)
-
-const PORT = process.env.PORT || 3000
 
 global.API = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name] } : {}) })) : '')
 
@@ -44,12 +40,9 @@ global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse()
 global.prefix = new RegExp('^[' + (opts['prefix'] || '‎!./@¿‽?#\\').replace(/[|\\{}()[\]^$+*?.\-\^]/g, '\\$&') + ']')
 
 const dbInstance = !process.env.DATABASE_URL ? new JSONFile('db.json') : /^https?:\/\//.test(process.env.DATABASE_URL) ? new cloudDBAdapter(process.env.DATABASE_URL) : /^mongodb(\+srv)?:\/\//i.test(process.env.DATABASE_URL) && opts.db ? new mongoDB(process.env.DATABASE_URL) : /^mongodb(\+srv)?:\/\//i.test(process.env.DATABASE_URL) && opts.dbv2 ? new mongoDBV2(process.env.DATABASE_URL) : new JSONFile('db.json')
-
-global.db = new Low(dbInstance)
-
-global.DATABASE = global.db
-
-global.loadDatabase = async function loadDatabase() {
+  global.db = new Low(dbInstance)
+  global.DATABASE = global.db
+  global.loadDatabase = async function loadDatabase() {
   return db.READ ? new Promise(resolve => {
     const intervalId = setInterval(async () => {
       if (!db.READ) {
@@ -64,30 +57,34 @@ global.loadDatabase = async function loadDatabase() {
     msgs: {},
     sticker: {},
     settings: {},
-    respon: {},
-    database: {},
     menfess: {},
     game: {},
     ...db.data
   }, db.chain = _.chain(db.data), null) : null
-}
-await loadDatabase()
+  }
+  await loadDatabase()
 
 const usePairingCode = !process.argv.includes('--pairing')
-
-const useMobile = process.argv.includes('--mobile')
-
 const question = function(text) {
-return new Promise(function(resolve) {
-rl.question(text, resolve)
-})
+   return new Promise(function(resolve) {
+   rl.question(text, resolve)
+  })
 }
+
 const rl = require('readline').createInterface(process.stdin, process.stdout)
+
 const store = makeInMemoryStore({
-logger: pino({ level: "silent", stream: "store" }),
+  logger: pino({ level: "silent", stream: "store" }),
 })
-const { version, isLatest } = await fetchLatestBaileysVersion()
-let { state, saveCreds } = await useMultiFileAuthState(path.resolve('./session'))
+
+const { 
+   version, 
+   isLatest 
+} = await fetchLatestBaileysVersion()
+const { 
+   state, 
+   saveCreds 
+} = await useMultiFileAuthState(path.resolve('./session'))
 const msgRetryCounterCache = new NodeCache()
 const connectionOptions = {
         version,
@@ -105,9 +102,9 @@ const connectionOptions = {
     		const messageData = await store.loadMessage(key.remoteJid, key.id)
     		return messageData?.message || undefined
 	},
-  generateHighQualityLinkPreview: true, 
-	      patchMessageBeforeSending: (message) => {
-                const requiresPatch = !!(
+     generateHighQualityLinkPreview: true, 
+	 patchMessageBeforeSending: (message) => {
+     const requiresPatch = !!(
                     message.buttonsMessage 
                     || message.templateMessage
                     || message.listMessage
@@ -131,31 +128,21 @@ const connectionOptions = {
        msgRetryCounterCache,
    defaultQueryTimeoutMs: undefined,
   }
-	global.conn = simple.makeWASocket(connectionOptions)
-	conn.isInit = false	
-	if (usePairingCode && !conn.authState.creds.registered) {
-		if (useMobile) throw new Error('Cannot use pairing code with mobile api')
-		const { registration } = { registration: {} }
-		let phoneNumber = bot.pairingNumber
-		do {
-		phoneNumber = await question(chalk.blueBright('Input a Valid number start with region code. Example : 62xxx:\n'))
-		} while (!Object.keys(PHONENUMBER_MCC).some(v => phoneNumber.startsWith(v)))
-		rl.close()
-		phoneNumber = phoneNumber.replace(/\D/g,'')
-		console.log(chalk.bgWhite(chalk.blue('Generating Code...')))
-		setTimeout(async () => {
-			let code = await conn.requestPairingCode(phoneNumber)
-			code = code?.match(/.{1,4}/g)?.join('-') || code
-			console.log(chalk.black(chalk.bgGreen(`Your Pairing Code : `)), chalk.black(chalk.white(code)))
-		}, 3000)
-	}	
+  
+  const conn = simple.makeWASocket(connectionOptions)
+  conn.isInit = false	
 	
-  if (!opts['test']) {
-		if (db) setInterval(async () => {
-			if (global.db.data) await db.write()
-			if (opts['autocleartmp'] && (support || {}).find)(tmp = [os.tmpdir(), 'tmp'], tmp.forEach(filename => cp.spawn('find', [filename, '-amin', '3', '-type', 'f', '-delete'])))
-		}, 30 * 1000)
-	} 
+  if (usePairingCode && !conn.authState.creds.registered) {
+   const { registration } = { registration: {} }
+   const phoneNumber = await question(chalk.blueBright('Input a Valid number start with region code. Example : 62xxx:\n'))
+  rl.close()
+  console.log(chalk.bgWhite(chalk.blue('Generating Code...')))
+  setTimeout(async () => {
+  const code = await conn?.requestPairingCode(phoneNumber)
+  const codes = code?.match(/.{1,4}/g)?.join('-') || code
+  console.log(chalk.black(chalk.bgGreen(`Your Pairing Code : `)), chalk.black(chalk.white(codes)))
+	}, 3000)
+  }
 	
   function clearTmp() {
 		const tmp = [os.tmpdir(), path.join(__dirname, './tmp')]
@@ -165,7 +152,7 @@ const connectionOptions = {
 			stats = fs.statSync(file),
 			stats.isFile() && (Date.now() - stats.mtimeMs >= 1000 * 60 * 3) ?
 			fs.unlinkSync(file) :
-			null))
+		null))
   }
   
   setInterval(async () => {
@@ -177,10 +164,10 @@ const connectionOptions = {
           `╰───❲ ${set.footer} ❳\n`
       )
     )
-	}, 5 * 60 * 1000)
+  }, 5 * 60 * 1000)
 	
  function restartLimitAndBalance() {
-  setInterval(async () => {
+   setInterval(async () => {
     const currentDate = new Date()
     const autoRestart = bot.autoRestartLimitAndBalance
     if (autoRestart) {
@@ -194,48 +181,47 @@ const connectionOptions = {
       console.log('Automatic restart of limit and balance is turned off.')
     }
    }, 60 * 1000) 
-  }
+ }
  restartLimitAndBalance()
-
  	
-  async function connectionUpdate(update) {
-  const { receivedPendingNotifications, connection, lastDisconnect, isOnline, isNewLogin } = update
-  if (isNewLogin) conn.isInit = true
-  if (connection == 'connecting') console.log(chalk.redBright('Mengaktifkan Bot, Mohon tunggu sebentar...'))
-  if (connection == 'open') conn.reply(owner.jid, 'Bot Sukses Terhubung', null)
-  if (isOnline == true) console.log(chalk.green('Status Aktif'))
-  if (isOnline == false) console.log(chalk.red('Status Mati'))
-  if (receivedPendingNotifications) console.log(chalk.blue('Menunggu Pesan Baru'))
-  if (connection == 'close') console.log(chalk.red('⏱ Koneksi Terputus Dan Mencoba Menyambung Kembali...'))
-  global.timestamp.connect = new Date
-  if (lastDisconnect && lastDisconnect.error && lastDisconnect.error.output && lastDisconnect.error.output.statusCode !== DisconnectReason.loggedOut && conn.ws.readyState !== WebSocket.CONNECTING) {
-    console.log(global.reloadHandler(true))
-  } 
-  if (global.db.data == null) await global.loadDatabase()
-  }        
+ async function connectionUpdate(update) {
+        const { 
+           connection, 
+           lastDisconnect, 
+           isNewLogin 
+        } = update
+		if (connection == 'connecting') console.log(chalk.yellowBright('Trying To Connect..'))
+		if (connection == 'close') console.log(chalk.red('Connection lost..'))
+		if (isNewLogin) conn.isInit = true
+		if (lastDisconnect && lastDisconnect.error && lastDisconnect.error.output && lastDisconnect.error.output.statusCode !== DisconnectReason.loggedOut && conn.ws.readyState !== WebSocket.CONNECTING) {
+		timestamp.connect = new Date
+	}
+	if (db.data == null) await loadDatabase()
+	console.log(JSON.stringify(update, null, 4))
+    }        
 	process.on('uncaughtException', console.error)
 	let isInit = true,
-		handler = require('./handler')
-    	reloadHandler = function(restatConn) {
-		let Handler = require('./handler')
-		if (Object.keys(Handler || {}).length) handler = Handler
-		if (restatConn) {
+    handler = require('./handler')
+    reloadHandler = function(restatConn) {
+	let Handler = require('./handler')
+	if (Object.keys(Handler || {}).length) handler = Handler
+	if (restatConn) {
 			try {
-				conn.ws.close()
+			   conn.ws.close()
 			} catch {}
-			conn = {
+			    conn = {
 				...conn,
 				...simple.makeWASocket(connectionOptions)
 			}
 		}
-		if (!isInit) {
+  if (!isInit) {
   conn.ev.off('messages.upsert', conn.handler)
   conn.ev.off('call', async (node) => require('./lib/anticall')(conn, node))
   conn.ev.off('group-participants.update', conn.onParticipantsUpdate)
   conn.ev.off('connection.update', conn.connectionUpdate)
   conn.ev.off('creds.update', conn.credsUpdate)
       }  
-  conn.welcome = `Welcome @user (ʘᴗʘ✿)\n${readMore}\n@desc`
+  conn.welcome = `Welcome @user (ʘᴗʘ✿)\n${Func.readMore()}\n@desc`
   conn.bye = "Sayonara @user (ー_ー゛)"
   conn.spromote = "@user telah naik jabatan o(〃＾▽＾〃)o"
   conn.sdemote = "@user telah turun jabatan ٩(๑꒦ິȏ꒦ິ๑)۶"
@@ -252,19 +238,20 @@ const connectionOptions = {
   isInit = false
   return true
 	}
-	let pluginFolder = path.join(__dirname, 'plugins')
-	let pluginFilter = filename => /\.js$/.test(filename)
-	plugins = {}
-	for (let filename of fs.readdirSync(pluginFolder).filter(pluginFilter)) {
-		try {
-			plugins[filename] = require(path.join(pluginFolder, filename))
-		} catch (e) {
-			conn.logger.error(e)
-			delete plugins[filename]
-		}
-	}	
-	console.log(Object.keys(plugins))	
-	reload = (_ev, filename) => {
+  reloadHandler()
+  let pluginFolder = path.join(__dirname, 'plugins')
+  let pluginFilter = filename => /\.js$/.test(filename)
+  plugins = {}
+  for (let filename of fs.readdirSync(pluginFolder).filter(pluginFilter)) {
+  try {
+	  plugins[filename] = require(path.join(pluginFolder, filename))
+  } catch (e) {
+	 conn.logger.error(e)
+	 delete plugins[filename]
+	}
+  }	
+  console.log(Object.keys(plugins))	
+  reload = (_ev, filename) => {
 		if (pluginFilter(filename)) {
 			let dir = path.join(pluginFolder, filename)
 			if (dir in require.cache) {
@@ -288,7 +275,6 @@ const connectionOptions = {
 	}
 	Object.freeze(reload)
 	fs.watch(path.join(__dirname, 'plugins'), reload)
-	reloadHandler()
 	async function _quickTest() {
 		let test = await Promise.all([
 			cp.spawn('ffmpeg'),
@@ -329,10 +315,3 @@ const connectionOptions = {
 _quickTest().then(() => conn.logger.info('Quick Test Done')).catch(console.error)
 console.log(color(time, "white"), color("Connecting...", "aqua"))
 })()
-
-const more = String.fromCharCode(8206)
-const readMore = more.repeat(4001)
-
-function pickRandom(list) {
-	return list[Math.floor(Math.random() * list.length)]
-}
